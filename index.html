@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">RequireJS + CanJS Test</a>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="navbar-text"><small class="initialism">Development mode:</small></li>
+                    <li><a href="/index.html?development">Root Page</a></li>
+                    <li><a href="/pages/example.html?development">Child Page</a></li>
+                    <li class="navbar-text"><small class="initialism">Production mode:</small></li>
+                    <li><a href="/index.html?production">Root Page</a></li>
+                    <li><a href="/pages/example.html?production">Child Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Highlight the active link in the navbar.
+        var currentPath = location.pathname + location.search;
+        var currentNavLinks = document.querySelectorAll(
+            '#navbar a[href="' + currentPath + '"]'
+        );
+        if (currentNavLinks[0]) {
+            currentNavLinks[0].parentNode.className = 'active';
+        }
+    </script>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Test jQuery works</td>
+            <td id="jqueryWorks"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test absolute module paths</td>
+            <td id="absolutePaths"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test global references</td>
+            <td id="globalRefs"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test module export references</td>
+            <td id="moduleRefs"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test relative module paths</td>
+            <td id="relativePaths"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test progressive loading</td>
+            <td id="progressiveLoad"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test can.Component</td>
+            <td id="canComponent"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test can.view.attr</td>
+            <td id="canViewAttr"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test CSS module</td>
+            <td id="cssModule"><span class="label label-danger">Fail?</span><span class="pass"></span></span></td>
+        </tr>
+        <tr>
+            <td>Test EJS template</td>
+            <td id="ejsTemplate"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test can.view(templatePath)</td>
+            <td id="canView"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test Mustache template</td>
+            <td id="mustacheTemplate"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test Mustache global helper</td>
+            <td id="mustacheHelper"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test Mustache partials</td>
+            <td id="mustachePartials"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test Stache template</td>
+            <td id="stacheTemplate"><span class="label label-danger">Fail?</span></td>
+        </tr>
+        <tr>
+            <td>Test production build removes //!steal-remove blocks</td>
+            <td id="stealRemoveBlocks"><span class="label label-danger">Fail?</span></td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+
+</div>
+
+</body>
+</html>
