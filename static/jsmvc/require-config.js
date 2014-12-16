@@ -2,7 +2,13 @@ requirejs.config({
     map: {
         '*': {
             // RequireJS loader plugin - here because it has more than one file.
-            css: 'requirejs-plugins/require-css/css'
+            css: 'requirejs-plugins/require-css/css',
+            // Always load these Mustache plugins, part 1/2.
+            'can/view/mustache': 'canjs-plugins/mustache'
+        },
+        'canjs-plugins': {
+            // Always load these Mustache plugins, part 2/2.
+            'can/view/mustache': 'can/view/mustache'
         }
     },
     paths: {
