@@ -1,0 +1,7 @@
+
+#cssModule .label-danger {
+    display: none;
+}
+#cssModule .pass:after {
+    content: 'OK';
+}
