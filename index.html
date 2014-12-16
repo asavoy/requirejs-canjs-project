@@ -116,5 +116,28 @@
 
 </div>
 
+
+<script>
+    var isProduction = (location.search === '?production');
+    // Whether to use the minified or source RequireJS.
+    if (isProduction) {
+        document.write('<script src="/static/build/requirejs/require.js"><' + '/script>');
+    }
+    else {
+        document.write('<script src="/static/jsmvc/requirejs/require.js"><' + '/script>');
+    }
+</script>
+<script>
+    // Set path to find JS modules.
+    require.config({
+        baseUrl: isProduction ? '/static/build/' : '/static/jsmvc/'
+    });
+    // Load config first.
+    require(['require-config'], function() {
+        // Now load main module.
+        require(['pages/index/index']);
+    });
+</script>
+
 </body>
 </html>
