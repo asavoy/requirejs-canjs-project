@@ -1,0 +1,30 @@
+
+DONE: basic production build with grunt build
+DONE: load production build
+DONE: test relative path to template
+DONE: should template plugins force extension or not?
+DONE: load CSS
+DONE: load static JS and bower components in static folder
+DONE: load a page not in the same folder as index.html
+DONE: partial templates
+DONE: remove steal-start / end things (or whiteout lines?)
+DONE: stach templates
+DONE: test mustache global helpers
+DONE: remember that we use canjs 2.1.4 amd-dev build
+DONE: test can view attr -> PIECE OF SHIT kinda working... is there a better way?
+DONE: extra plugin pattern; e.g. jquery-migrate, can/map/define
+DONE: document how we're not using bower_components in favor of
+       committing directly. bower_components becomes really heavy
+       due to most packages storing many copies of source files.
+       it's hard to avoid clogging up the requirejs build.
+DONE: comment up Gruntfile.js
+DONE: requirejs optimizer build with common modules vs page-specific
+DONE: generate source maps / use uglifyjs2
+DONE: add that duplicate finder thing, i think from grunt-contribu-requirejs
+DONE: use minified requirejs
+DONE: check production build doesn't load extra stuff
+
+TODO: sort out git history
+TODO: create repo for requirejs-canjs-templates
+TODO: browser testing
+TODO: funcunit test example
