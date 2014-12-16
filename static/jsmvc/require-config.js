@@ -1,5 +1,9 @@
 requirejs.config({
     map: {
+        '*': {
+            // RequireJS loader plugin - here because it has more than one file.
+            css: 'requirejs-plugins/require-css/css'
+        }
     },
     paths: {
     },
