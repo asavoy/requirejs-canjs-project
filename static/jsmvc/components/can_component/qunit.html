@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>components/can_component QUnit Test</title>
+    <script src="../../requirejs/require.js"></script>
+    <script>
+        // Set path to find JS modules.
+        require.config({
+            baseUrl: '/static/jsmvc/'
+        });
+        // Load config first.
+        require(['require-config'], function() {
+            // Now load main module.
+            require(['components/can_component/test/qunit']);
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

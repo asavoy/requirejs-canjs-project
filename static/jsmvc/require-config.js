@@ -24,6 +24,10 @@ requirejs.config({
             deps: ['jquery/jquery'],
             exports: 'jQuery'
         },
+        // Shim for FuncUnit to load after jQuery.
+        'funcunit': {
+            deps: ['jquery']
+        },
         // Ensures that `can/view/ejs` is included in the build.
         ejs: {
             deps: ['can/view/ejs']
