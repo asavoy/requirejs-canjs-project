@@ -3,10 +3,16 @@
 module.exports = function(grunt) {
 
     // Set this to false if you want a non-minified build.
-    var USE_MINIFIED_BUILD = true;
+    var USE_MINIFIED_BUILD = false;
 
     grunt.initConfig({
-
+        autobundles: {
+            main: {
+                options: {
+                    requireConfigModule: 'require-config'
+                }
+            }
+        },
         // RequireJS configuration.
         //
         // IMPORTANT: Before changing anything at all! RTFM!
@@ -54,26 +60,15 @@ module.exports = function(grunt) {
                             // This is the common build layer, we have to
                             // manually declare common modules to include with
                             // `require-config.js`.
-                            name: 'require-config',
-                            include: [
-                                'jquery',
-                                'can',
-                                'css',
-                                'ejs',
-                                'mustache',
-                                'requirejs-plugins/require-css/normalize',
-                                'stache'
-                            ]
+                            name: 'require-config'
                         },
                         // Here are the main modules - the entry point loaded
                         // by pages, or via progressive loading.
                         {
-                            name: 'pages/index/index',
-                            exclude: ['require-config']
+                            name: 'pages/index/index'
                         },
                         {
-                            name: 'pages/example/example',
-                            exclude: ['require-config']
+                            name: 'pages/example/example'
                         }
                     ],
                     // Don't look at nested define() calls for dependencies
@@ -133,6 +128,7 @@ module.exports = function(grunt) {
 
 
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-requirejs-auto-bundles');
 
-    grunt.registerTask('build', ['requirejs']);
+    grunt.registerTask('build', ['autobundles', 'requirejs']);
 };
