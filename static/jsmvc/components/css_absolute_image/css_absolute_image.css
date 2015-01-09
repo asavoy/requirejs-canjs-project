@@ -1,0 +1,9 @@
+
+#cssAbsoluteImage::before {
+    content: "";
+    background: url(/static/jsmvc/components/css_absolute_image/css_absolute_image.png) repeat-y;
+    width: 40px;
+    height: 20px;
+    display: block;
+    position: absolute;
+}
