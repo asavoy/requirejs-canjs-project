@@ -1,0 +1,9 @@
+
+#cssRelativeImage::before {
+    content: "";
+    background: url(./css_relative_image.png) repeat-y;
+    width: 40px;
+    height: 20px;
+    display: block;
+    position: absolute;
+}

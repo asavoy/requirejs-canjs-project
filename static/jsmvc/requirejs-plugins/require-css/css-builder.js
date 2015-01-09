@@ -96,10 +96,33 @@ define(['require', './normalize'], function(req, normalize) {
   // NB add @media query support for media imports
   var importRegEx = /@import\s*(url)?\s*(('([^']*)'|"([^"]*)")|\(('([^']*)'|"([^"]*)"|([^\)]*))\))\s*;?/g;
   var absUrlRegEx = /^([^\:\/]+:\/)?\//;
-  
+
   // Write Css module definition
   var writeCSSDefinition = "define('@writecss', function() {return function writeCss(c) {var d=document,a='appendChild',i='styleSheet',s=d.createElement('style');s.type='text/css';d.getElementsByTagName('head')[0][a](s);s[i]?s[i].cssText=c:s[a](d.createTextNode(c));};});";
 
+  var writeDynamicBaseCSSDefinition = (
+    "define('@writecss', ['module'], function(module) {" +
+      "return function writeCss(c) {" +
+        "var d=document,a='appendChild',i='styleSheet',s=d.createElement('style');" +
+        "s.type='text/css'; " +
+        "var baseUrl = module.config().baseUrl || require.s.contexts._.config.baseUrl; " +
+        "var absBaseUrl = ''; " +
+        "if (baseUrl.indexOf('://') !== -1) {" +
+          "absBaseUrl = baseUrl.split('/').slice(0, 3).join('/');" +
+        "}" +
+        "var cssRegex = /@import\\\s*(\"([^\"]*)\"|'([^']*)')|url\\\s*\\\((?!#)\\\s*(\\\s*\"([^\"]*)\"|'([^']*)'|[^\\\)]*\\\s*)\\\s*\\\)/ig;" +
+        "c = c.replace(cssRegex, function(orig, p1, p2, p3, p4, p5, p6, p7, p8) {" +
+          "var url = p3 || p2 || p5 || p6 || p4;" +
+          "if (url.charAt(0) === '/') { " +
+            "return orig.replace(url, absBaseUrl + url); " +
+          "} else {" +
+            "return orig.replace(url, baseUrl + url);" +
+          "}" +
+        "}); " +
+        "d.getElementsByTagName('head')[0][a](s);" +
+        "s[i]?s[i].cssText=c:s[a](d.createTextNode(c));" +
+      "};" +
+    "});");
   var siteRoot;
 
   var baseParts = req.toUrl('base_url').split('/');
@@ -177,15 +200,18 @@ define(['require', './normalize'], function(req, normalize) {
       var style = cssBuffer[moduleName];
 
       if (config.writeCSSModule && style) {
- 	    if (writeCSSForLayer) {
-    	  writeCSSForLayer = false;
-          write(writeCSSDefinition);
+        if (writeCSSForLayer) {
+          writeCSSForLayer = false;
+          if (config.dynamicCSSBasePath) {
+            write(writeDynamicBaseCSSDefinition);
+          } else {
+            write(writeCSSDefinition);
+          }
         }
 
-        cssModule = 'define(["@writecss"], function(writeCss){\n writeCss("'+ escape(compress(style)) +'");\n})';
-      }
-      else {
-		cssModule = 'define(function(){})';
+          cssModule = 'define(["@writecss"], function(writeCss){\n writeCss("'+ escape(compress(style)) +'");\n})';
+      } else {
+        cssModule = 'define(function(){})';
       }
 
       write.asModule(pluginName + '!' + moduleName, cssModule);
