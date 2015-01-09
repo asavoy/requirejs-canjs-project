@@ -28,6 +28,10 @@ module.exports = function(grunt) {
                     // Minification to apply to CSS. The require-css plugin
                     // takes care of this, so it is useless to do it here.
                     optimizeCss: 'none',
+                    // These CSS settings are for require-css.
+                    buildCSS: true,
+                    writeCSSModule: true,
+                    dynamicCSSBasePath: true,
                     // Whether to generate Source Maps for debugging.
                     generateSourceMaps: USE_MINIFIED_BUILD,
                     // Specifies files to ignore for the build.
