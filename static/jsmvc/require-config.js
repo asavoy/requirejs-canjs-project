@@ -25,8 +25,14 @@ requirejs.config({
             exports: 'jQuery'
         },
         // Shim for FuncUnit to load after jQuery.
-        'funcunit': {
-            deps: ['jquery']
+        'funcunit/funcunit': {
+            deps: ['jquery', 'funcunit/qunit'],
+            exports: 'FuncUnit'
+        },
+        // Shim for FuncUnit to load after jQuery.
+        'funcunit/qunit': {
+            deps: ['jquery'],
+            exports: 'QUnit'
         },
         // Ensures that `can/view/ejs` is included in the build.
         ejs: {
