@@ -23,8 +23,10 @@ DONE: generate source maps / use uglifyjs2
 DONE: add that duplicate finder thing, i think from grunt-contribu-requirejs
 DONE: use minified requirejs
 DONE: check production build doesn't load extra stuff
+DONE: sort out git history
+DONE: create repo for requirejs-canjs-templates
+DONE: browser testing
+DONE: add auto-bundle support
+DONE: combine progressive-loading and auto-bundles
 
-TODO: sort out git history
-TODO: create repo for requirejs-canjs-templates
-TODO: browser testing
 TODO: funcunit test example
