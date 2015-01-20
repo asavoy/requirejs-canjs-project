@@ -69,6 +69,9 @@ module.exports = function(grunt) {
                         },
                         {
                             name: 'pages/example/example'
+                        },
+                        {
+                            name: 'components/progressive_load/progressive_load_example'
                         }
                     ],
                     // Don't look at nested define() calls for dependencies
