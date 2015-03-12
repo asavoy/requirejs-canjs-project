@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+        /* Flexbox */
+        .stickyfooter-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .stickyfooter-content {
+            flex: 1;
+        }
+        .stickyfooter-header {
+            order: -1;
+            flex: 0.2;
+            min-height: 50px;
+            max-height: 300px;
+        }
+
+        /* Styling */
+        .stickyfooter-container {
+        }
+        .stickyfooter-content {
+        }
+        .stickyfooter-header {
+            background: #eee;
+        }
+        .stickyfooter-footer {
+            background: #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="stickyfooter-container">
+    <div class="stickyfooter-content">
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+    </div>
+    <div class="stickyfooter-header">
+        <h3>Sticky footer example</h3>
+    </div>
+    <div class="stickyfooter-footer">
+        <p>This is the footer.</p>
+    </div>
+</div>
+
+
+<script>
+    var isProduction = (location.search === '?production');
+    // Whether to use the minified or source RequireJS.
+    if (isProduction) {
+        document.write('<script src="/static/build/requirejs/require.js"><' + '/script>');
+    }
+    else {
+        document.write('<script src="/static/jsmvc/requirejs/require.js"><' + '/script>');
+    }
+</script>
+<script>
+    // Set path to find JS modules.
+    require.config({
+        baseUrl: isProduction ? '/static/build/' : '/static/jsmvc/'
+    });
+    // Load config first.
+    require(['require-config'], function() {
+        // Now load main module.
+        require(['pages/flexbox/flexbox']);
+    });
+</script>
+
+</body>
+</html>

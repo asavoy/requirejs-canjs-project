@@ -1,0 +1,6 @@
+define([
+    'jquery',
+    'can'
+], function($) {
+
+});
