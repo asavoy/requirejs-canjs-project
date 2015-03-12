@@ -99,6 +99,20 @@ define(['require', './normalize'], function(req, normalize) {
 
   // Write Css module definition
   var writeCSSDefinition = "define('@writecss', function() {return function writeCss(c) {var d=document,a='appendChild',i='styleSheet',s=d.createElement('style');s.type='text/css';d.getElementsByTagName('head')[0][a](s);s[i]?s[i].cssText=c:s[a](d.createTextNode(c));};});";
+  var writeCSS = function() {
+    return function writeCss(cssContent) {
+      var styleElement = document.createElement('style');
+      styleElement.type = 'text/css';
+      document.getElementsByTagName('head')[0].appendChild(styleElement);
+      if (styleElement.styleSheet) {
+        styleElement.styleSheet.cssText = cssContent;
+      }
+      else {
+        styleElement.appendChild(document.createTextNode(cssContent));
+      }
+    };
+  };
+  writeCSSDefinition = "define('@writecss', " + writeCSS.toString() + ");";
 
   var writeDynamicBaseCSSDefinition = (
     "define('@writecss', ['module'], function(module) {" +
@@ -123,6 +137,35 @@ define(['require', './normalize'], function(req, normalize) {
         "s[i]?s[i].cssText=c:s[a](d.createTextNode(c));" +
       "};" +
     "});");
+
+  var writeCssWithDynamicBaseUrl = function(module) {
+    return function writeCss(cssContent) {
+      var styleElement = document.createElement('style');
+      styleElement.type = 'text/css';
+      var baseUrl = module.config().baseUrl || require.s.contexts._.config.baseUrl;
+      var absBaseUrl = '';
+      if (baseUrl.indexOf('://') !== -1) {
+        absBaseUrl = baseUrl.split('/').slice(0, 3).join('/');
+      }
+      var matchUrlsRegex = /@import\s*("([^"]*)"|'([^']*)')|url\s*\((?!#)\s*(\s*"([^"]*)"|'([^']*)'|[^\)]*\s*)\s*\)/ig;
+      cssContent = cssContent.replace(matchUrlsRegex, function(orig, p1, p2, p3, p4, p5, p6, p7, p8) {
+        var url = p3 || p2 || p5 || p6 || p4;
+        if (url.charAt(0) === '/') {
+          return orig.replace(url, absBaseUrl + url);
+        } else {
+          return orig.replace(url, baseUrl + url);
+        }
+      });
+      document.getElementsByTagName('head')[0].appendChild(styleElement);
+      if (styleElement.styleSheet) {
+        styleElement.styleSheet.cssText = cssContent;
+      }
+      else {
+        styleElement.appendChild(document.createTextNode(cssContent));
+      }
+    };
+  };
+  writeDynamicBaseCSSDefinition = "define('@writecss', ['module'], " + writeCssWithDynamicBaseUrl.toString() + ")";
   var siteRoot;
 
   var baseParts = req.toUrl('base_url').split('/');

@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
 
     // Set this to false if you want a non-minified build.
-    var USE_MINIFIED_BUILD = false;
+    var USE_MINIFIED_BUILD = true;
 
     grunt.initConfig({
         autobundles: {
