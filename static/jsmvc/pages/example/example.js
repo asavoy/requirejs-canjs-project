@@ -18,6 +18,7 @@ define([
     'components/progressive_load/progressive_load',
     'components/relative_paths/relative_paths',
     'components/stache_template/stache_template',
+    'components/can_import/can_import',
     'components/steal_remove_blocks/steal_remove_blocks'
 ], function($) {
 
